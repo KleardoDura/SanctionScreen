@@ -60,14 +60,15 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
             label: 'Add',
             iconClass: 'oj-ux-ico-fire'
           }
-        },
+        }
+        /*,
         {
           path: 'customers',
           detail: {
             label: 'Customers',
             iconClass: 'oj-ux-ico-contact-group'
           }
-        }
+        }*/
 
       ];
 
