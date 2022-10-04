@@ -14,53 +14,56 @@
 
 
 define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs/ojbufferingdataprovider", 'jquery', 'ojs/ojknockout', 'ojs/ojcollectiontabledatasource', 'ojs/ojformlayout', 'ojs/ojinputtext', 'ojs/ojslider',
-'ojs/ojinputnumber', 'ojs/ojbutton', 'ojs/ojtable', 'ojs/ojlabel', 'ojs/ojvalidationgroup',
-'ojs/ojvalidation-number', 'ojs/ojarraytabledatasource'
-    ],
-    function ( accUtils, oj, ko, ArrayDataProvider, BufferingDataProvider, $) {
-      function IncidentsViewModel() {
-      
-        
-        var self = this;
-        self.inputNameToAdd=ko.observable();
-        self.groupValid=ko.observable();
-
-        var today = new Date();
-var dd = today.getDate();
-
-var mm = today.getMonth()+1; 
-var yyyy = today.getFullYear();
-if(dd<10) 
-{
-    dd='0'+dd;
-} 
-
-if(mm<10) 
-{
-    mm='0'+mm;
-} 
-yyyy%=100;
-today = dd+mm+yyyy;
-console.log(today);
+    'ojs/ojinputnumber', 'ojs/ojbutton', 'ojs/ojtable', 'ojs/ojlabel', 'ojs/ojvalidationgroup',
+    'ojs/ojvalidation-number', 'ojs/ojarraytabledatasource'
+  ],
+  function (accUtils, oj, ko, ArrayDataProvider, BufferingDataProvider, $) {
+    function IncidentsViewModel() {
 
 
-        
+      var self = this;
+      self.inputNameToAdd = ko.observable();
+      self.groupValid = ko.observable();
+
+      var today = new Date();
+      var dd = today.getDate();
+
+      var mm = today.getMonth() + 1;
+      var yyyy = today.getFullYear();
+      if (dd < 10) {
+        dd = '0' + dd;
+      }
+
+      if (mm < 10) {
+        mm = '0' + mm;
+      }
+      yyyy %= 100;
+      today = dd + mm + yyyy;
+      console.log(today);
+
+
+
       self.loadData = function () {
-
-
-        /*
-        if (self.groupValid() === 'invalidShown') {
-          return;
+  
+      
+        const tracker = document.getElementById("tracker");
+        if (tracker.valid !== "valid") {       
+          tracker.showMessages();
+          tracker.focusOn("@firstInvalidShown");
+          return ;
         }
-*/
+      
+       
+
+
         const sanctionReq = {
 
 
-          id:  today+"-MANL",
+          id: today + "-MANL",
           name: self.inputNameToAdd(),
           listName: "MANL",
           percentage: 1
-         
+
         };
         var tempArray = [];
         $.ajax({
@@ -77,14 +80,14 @@ console.log(today);
           success: function (data) {
             console.log(JSON.stringify(sanctionReq));
             console.log("test");
-           // parser = new DOMParser();
+            // parser = new DOMParser();
             //xmlDoc = parser.parseFromString(data, "text/xml");
-           // let dataObject = xmlToJson(xmlDoc);
+            // let dataObject = xmlToJson(xmlDoc);
             //Ketu duhet nje kusht qe nese kapet vetem nje elemetn te kthehet si array jo obj          
-           // this.responseData = dataObject.matchResponse.listMatchEntry;
+            // this.responseData = dataObject.matchResponse.listMatchEntry;
             console.log('1');
             console.log(data);
-   
+
           }
 
         });
@@ -93,45 +96,17 @@ console.log(today);
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
       }
 
-        
 
 
 
 
 
-        
 
-      }
-      return IncidentsViewModel;
+
+
     }
-    );
+    return IncidentsViewModel;
+  }
+);

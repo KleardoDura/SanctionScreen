@@ -73,6 +73,14 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
 
 
       self.loadData = function () {
+        
+        const tracker = document.getElementById("tracker");
+        if (tracker.valid !== "valid") {       
+          tracker.showMessages();
+          tracker.focusOn("@firstInvalidShown");
+          return ;
+        }
+      
 
         const sanctionReq = {
 
@@ -241,7 +249,9 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
         // Implement further logic if needed
       };
 
+  
 
+      
 
 
     }
