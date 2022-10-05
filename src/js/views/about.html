@@ -3,6 +3,7 @@
  Licensed under The Universal Permissive License (UPL), Version 1.0
  as shown at https://oss.oracle.com/licenses/upl/
  -->
+
 <div class="oj-hybrid-padding">
   <h1>LOG IN</h1>
 </div>
@@ -12,7 +13,7 @@
   <div class="oj-xl-4 oj-lg-4 oj-md-4 oj-flex-item">
     <oj-validation-group valid="{{groupValid}}">
 
-
+<div >
       <div class="oj-flex oj-flex-items-pad">
 
         <div
@@ -25,6 +26,7 @@
           </oj-input-text>
         </div>
       </div>
+    </br>
       <div class="oj-flex oj-flex-items-pad">
 
         <div
@@ -37,7 +39,7 @@
           </oj-form-layout>
         </div>
       </div>
-
+    </div>
       </br>
 
     </oj-validation-group>
@@ -57,9 +59,10 @@
 
 
 
-    <oj-button on-click="[[loadData]]">Log in</oj-button>
+    <oj-button id="log-in-button" style="background-color: #83BB26;" on-click="[[loadData]]">Log in</oj-button>
     <br />
   </div>
+
 
 
 </div>

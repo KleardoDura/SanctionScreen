@@ -42,18 +42,20 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
       console.log(today);
 
 
+ 
+
 
       self.loadData = function () {
-  
-      
+
+
         const tracker = document.getElementById("tracker");
-        if (tracker.valid !== "valid") {       
+        if (tracker.valid !== "valid") {
           tracker.showMessages();
           tracker.focusOn("@firstInvalidShown");
-          return ;
+          return;
         }
-      
-       
+
+
 
 
         const sanctionReq = {
@@ -87,6 +89,8 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
             // this.responseData = dataObject.matchResponse.listMatchEntry;
             console.log('1');
             console.log(data);
+            alert('Te dhenat u kaluan me sukses!');
+            self.inputNameToAdd(' ');
 
           }
 

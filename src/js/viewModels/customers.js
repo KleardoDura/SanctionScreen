@@ -9,154 +9,144 @@
  * Your customer ViewModel code goes here
  */
 //define(['../accUtils'],
- //function(accUtils) {
-   // function CustomerViewModel() {
-    
+//function(accUtils) {
+// function CustomerViewModel() {
+
 
 
 /////////////////////////////////////////////////////////
 
 
-       
-  
 
-define(['knockout', 'ojs/ojbootstrap', 'ojs/ojarraydataprovider', 'ojs/ojcontext', 'ojs/ojknockout', 'ojs/ojinputtext',
-    'ojs/ojinputnumber', 'ojs/ojtable','ojs/ojdatetimepicker','ojs/ojformlayout','ojs/ojselectsingle', 'ojs/ojlabel', 
-    'ojs/ojchart','ojs/ojvalidationgroup'],
-  function (ko, Bootstrap, ArrayDataProvider, Context , maleN=0,
-     femaleN=0,
-     peopleN=0,
-     notSelected=0) {
 
-  
+
+define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jquery', "ojs/ojknockout", "ojs/ojfilepicker", 'ojs/ojvalidationgroup', "ojs/ojbutton"],
+  function (exports, ko, ojbootstrap_1, FilePickerUtils, $) {
+
+
     function CustomerViewModel() {
-      var deptArray =[];
-   /*    [
-      { FirstName: 'klei', LastName: 'Dura', Birthday:'2002-07-13',Gender:'Male',Birthplace:'Athine', Age: 20 },
-      { FirstName: 'Ana', LastName: 'Stefani',Gender:'Female' ,Birthday:'1996-07-02', Age: 26 }];
-*/
-     
 
 
 
 
-      var PieArray=[];
-
-
-      this.deptObservableArray = ko.observableArray(deptArray);
-      this.dataprovider = new ArrayDataProvider(this.deptObservableArray, { keyAttributes: '@index' });
+      
       this.groupValid = ko.observable();
-      this.isEmptyTable = ko.computed(function () {
-        return this.deptObservableArray().length === 0;
-      }, this);
+
+      this.fileNames = ko.observableArray([]);
+      this.invalidMessage = ko.observable("");
+      this.selectListener = (event) => {
+        this.invalidMessage("");
+        const files = event.detail.files;
+        this.fileNames(Array.prototype.map.call(files, (file) => {
+          return file.name;
+        }));
+      };
+      this.invalidListener = (event) => {
+        this.fileNames([]);
+        this.invalidMessage("{severity: '" +
+          event.detail.messages[0].severity +
+          "', summary: '" +
+          event.detail.messages[0].summary +
+          "'}");
+        const promise = event.detail.until;
+        if (promise) {
+          promise.then(() => {
+            this.invalidMessage("");
+          });
+        }
+      };
+      this.beforeSelectListener = (event) => {
+        const accept = event.detail.accept;
+        const files = event.detail.files;
+        const messages = [];
+        let file;
+        const invalidFiles = [];
 
 
+        //kontrollojm permasat
+        for (let i = 0; i < files.length; i++) {
+          file = files[i];
+          if (file.size > 10000000) {
+            alert('File shume i madhe');
+            invalidFiles.push(file.name);
+          }
+          if (file.size === 0) {
+            alert('File nuk mund te jete bosh');
+            invalidFiles.push(file.name);
+          }
+        }
 
-    PieArray=[
-     
-      {
-        "id": 1,
-        "series": "Male",
-        "group": "Group A",
-        "value": maleN
-      },
-      {
-        "id": 2,
-        "series": "Female",
-        "group": "Group A",
-        "value": femaleN
-      },
-      {
-        "id": 3,
-        "series": "Not Selected",
-        "group": "Group A",
-        "value": notSelected
+
+        //kontrollojm formatin
+        var j = 0;
+        var x = file.name;
+
+        for (j = x.length - 1; j > 0; j--) {
+
+          if (x[j] === '.') {
+            break;
+          }
+        }
+
+        let result = x.substring(j + 1);
+        console.log(result);
+        if (result === 'xml') {
+          alert('Formati  i duhur');
+          this.fileNames(file.name);
+
+
+          alert("File u ngarkua me sukses");}
+          else{alert('FORMAT JO  I DUHUR');
+        return;};
+
+          if (invalidFiles.length === 0) {
+            accept(Promise.resolve());
+          } else {
+            if (invalidFiles.length === 1) {
+              messages.push({
+                severity: "error",
+                summary: "File " +
+                  invalidFiles[0] +
+                  " nuk eshte ne permasat e pershtatshme",
+              });
+            } else {
+              const fileNames = invalidFiles.join(", ");
+              messages.push({
+                severity: "error",
+                summary: fileNames +
+                  " nuk eshte ne permasat e pershtatshm.",
+              });
+            }
+            accept(Promise.reject(messages));
+          }
+
+          var formData = new FormData();
+          console.log(file);
+          formData.append('x', $('#file'));
+          $.ajax({
+            url: 'https://md5.tpondemand.com/api/v1/Attachments/meta',
+            type: 'POST',
+            data: formData,
+            processData: false, // tell jQuery not to process the data
+            contentType: false, // tell jQuery not to set contentType
+            success: function (data) {
+              console.log(data);
+
+            }
+          });
+        
       }
 
-    ];
-
-    
-    var ChartData=ko.observableArray(PieArray);
-    this.UserPieDataProvider =new ArrayDataProvider(ChartData , {
-      keyAttributes: 'id',
-  });
+    };
 
 
-      // add to the observableArray
-      this.addRow = function () {
-        if (this.groupValid() === 'invalidShown') {
-          return;
-        }
-        var dept = {
-              FirstName:this.inputFirstName(),
-              LastName:this.inputLastName(),
-              Birthday:this.inputBirthday(),
-              Gender:this.selectGenderValue(),
-              Birthplace:this.inputBirthplace(),
-              Age:this.inputAge()
-            
-        }; 
-       
-
-        this.deptObservableArray.push(dept);     
 
 
-if(dept.Gender=='Male'){
-  maleN++;
-}
-if (dept.Gender=='Female'){
-  femaleN++;
-}
-if(dept.Gender!='Male' && dept.Gender!='Female')
-  
-  {notSelected++;}
-
-        PieArray[0].value=maleN;
 
 
-        PieArray[1].value=femaleN;
-        PieArray[2].value=notSelected;
-        
-valueCache={}
 
-ChartData(PieArray);     
-       // console.log('People:', peopleN);
-       // console.log( 'Male:', maleN);
-
-
-      }.bind(this);
-  
-      // intialize the observable values in the forms
-      this.inputFirstName=ko.observable(null);
-      this.inputLastName=ko.observable(null);
-      this.inputBirthday=ko.observable(null);
-      this.selectGenderValue=ko.observable(null);  
-      this.inputBirthplace=ko.observable(null);
-      this.inputAge=ko.observable(null);
-      this.inputGender=ko.observable(new  ArrayDataProvider([
-        {
-          value:1,
-          label:"Male"
-        },
-        {
-          value:2,
-          label:"Female"
-        }
-       ],{
-         keyAttributes:'label',
-      }));
-
-      console.log( peopleN);
-
-   
-    }
-
-
- 
-
-
-   return CustomerViewModel;
+    return CustomerViewModel;
   }
 
-  
+
 );

@@ -60,16 +60,15 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
             label: 'Add',
             iconClass: 'oj-ux-ico-fire'
           }
-        }
-        /*,
+        },
         {
           path: 'customers',
           detail: {
-            label: 'Customers',
-            iconClass: 'oj-ux-ico-contact-group'
+            label: 'Attach',
+            iconClass: 'oj-ux-ico-fire'
           }
-        }*/
-
+        }
+       
       ];
 
       // Router setup
@@ -84,7 +83,7 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
 
       // Setup the navDataProvider with the routes, excluding the first redirected
       // route.
-      this.navDataProvider = new ArrayDataProvider(navData.slice(1), {
+      this.navDataProvider = new ArrayDataProvider(navData.slice(2), {
         keyAttributes: "path"
       });
 
@@ -112,7 +111,15 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
         });
         self.booleanShowNavBar(true);
 
-      }
+      };
+      test1 = function () {
+        router.go({
+          path: 'about'
+        });
+
+        self.booleanShowNavBar(false);
+
+      };
 
       // Footer
       this.footerLinks = [{
