@@ -20,15 +20,15 @@
 
 
 
-define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jquery', "ojs/ojknockout", "ojs/ojfilepicker", 'ojs/ojvalidationgroup', "ojs/ojbutton"],
-  function (exports, ko, ojbootstrap_1, FilePickerUtils, $) {
+define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jquery',  '../appController',"ojs/ojknockout", "ojs/ojfilepicker", 'ojs/ojvalidationgroup', "ojs/ojbutton"],
+  function (exports, ko, ojbootstrap_1, FilePickerUtils, $,app) {
 
 
     function CustomerViewModel() {
 
 
 
-
+      app.test3();
 
       this.groupValid = ko.observable();
 

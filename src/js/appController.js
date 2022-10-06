@@ -112,7 +112,7 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
         self.booleanShowNavBar(true);
 
       };
-      test1 = function () {
+      this.test1 = function () {
         router.go({
           path: 'about'
         });
@@ -120,32 +120,38 @@ define(['knockout', 'ojs/ojcontext', 'ojs/ojmodule-element-utils', 'ojs/ojknocko
         self.booleanShowNavBar(false);
 
       };
+      this.test2=function(){
+        self.booleanShowNavBar(false);
+      }
+      this.test3=function(){
+        self.booleanShowNavBar(true);
+      }
 
       // Footer
       this.footerLinks = [{
-          name: 'About Oracle',
+          name: 'About Facilization',
           linkId: 'aboutOracle',
-          linkTarget: 'http://www.oracle.com/us/corporate/index.html#menu-about'
+          linkTarget: 'https://www.facilization.com/en/about-us/'
         },
         {
           name: "Contact Us",
           id: "contactUs",
-          linkTarget: "http://www.oracle.com/us/corporate/contact/index.html"
+          linkTarget: "https://www.facilization.com/en/contact/"
         },
         {
-          name: "Legal Notices",
+          name: "Solutions",
           id: "legalNotices",
-          linkTarget: "http://www.oracle.com/us/legal/index.html"
+          linkTarget: "https://www.facilization.com/en/solutions-facilizations/"
         },
         {
-          name: "Terms Of Use",
+          name: "Products",
           id: "termsOfUse",
-          linkTarget: "http://www.oracle.com/us/legal/terms/index.html"
+          linkTarget: "https://www.facilization.com/en/products/"
         },
         {
-          name: "Your Privacy Rights",
+          name: "Services",
           id: "yourPrivacyRights",
-          linkTarget: "http://www.oracle.com/us/legal/privacy/index.html"
+          linkTarget: "https://www.facilization.com/en/services/"
         },
       ];
     }
