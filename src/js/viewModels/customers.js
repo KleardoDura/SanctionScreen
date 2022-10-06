@@ -29,7 +29,7 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
 
 
 
-      
+
       this.groupValid = ko.observable();
 
       this.fileNames = ko.observableArray([]);
@@ -61,80 +61,89 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
         const messages = [];
         let file;
         const invalidFiles = [];
-
+        var check = false;
 
         //kontrollojm permasat
         for (let i = 0; i < files.length; i++) {
           file = files[i];
           if (file.size > 10000000) {
-            alert('File shume i madhe');
+            alert('File shume i madh');
             invalidFiles.push(file.name);
+            check = true;
           }
           if (file.size === 0) {
             alert('File nuk mund te jete bosh');
             invalidFiles.push(file.name);
+            check = true;
+
           }
         }
 
+        if (check === false) {
+          //kontrollojm formatin
+          var j = 0;
+          var x = file.name;
 
-        //kontrollojm formatin
-        var j = 0;
-        var x = file.name;
+          for (j = x.length - 1; j > 0; j--) {
 
-        for (j = x.length - 1; j > 0; j--) {
-
-          if (x[j] === '.') {
-            break;
+            if (x[j] === '.') {
+              break;
+            }
           }
-        }
 
-        let result = x.substring(j + 1);
-        console.log(result);
-        if (result === 'xml') {
-          alert('Formati  i duhur');
-          this.fileNames(file.name);
+          let result = x.substring(j + 1);
+          console.log(result);
 
 
-          alert("File u ngarkua me sukses");}
-          else{alert('FORMAT JO  I DUHUR');
-        return;};
-
-          if (invalidFiles.length === 0) {
-            accept(Promise.resolve());
+          if (result === 'xml') {
+           
+            this.fileNames(file.name);
+            alert("File u ngarkua me sukses");
           } else {
-            if (invalidFiles.length === 1) {
-              messages.push({
-                severity: "error",
-                summary: "File " +
-                  invalidFiles[0] +
-                  " nuk eshte ne permasat e pershtatshme",
-              });
-            } else {
-              const fileNames = invalidFiles.join(", ");
-              messages.push({
-                severity: "error",
-                summary: fileNames +
-                  " nuk eshte ne permasat e pershtatshm.",
-              });
-            }
-            accept(Promise.reject(messages));
+            alert('Format jo i duhur');
+           
+            invalidFiles.push(file.name);
+           
+          };
+        }
+
+        if (invalidFiles.length === 0) {
+          accept(Promise.resolve());
+        } else {
+          if (invalidFiles.length === 1) {
+            messages.push({
+              severity: "error",
+              summary: "File " +
+                invalidFiles[0] +
+                " jo i pershtatshme",
+            });
+          } else {
+            const fileNames = invalidFiles.join(", ");
+            messages.push({
+              severity: "error",
+              summary: fileNames +
+                "jo i pershtatshm.",
+            });
           }
+          accept(Promise.reject(messages));
+          return 0;
+        }
 
-          var formData = new FormData();
-          console.log(file);
-          formData.append('x', $('#file'));
-          $.ajax({
-            url: 'https://md5.tpondemand.com/api/v1/Attachments/meta',
-            type: 'POST',
-            data: formData,
-            processData: false, // tell jQuery not to process the data
-            contentType: false, // tell jQuery not to set contentType
-            success: function (data) {
-              console.log(data);
+        var formData = new FormData();
+        console.log(file);
+        formData.append('x', $('#file'));
+        $.ajax({
+          url: 'https://md5.tpondemand.com/api/v1/Attachments/meta',
+          type: 'POST',
+          data: formData,
+          processData: false, // tell jQuery not to process the data
+          contentType: false, // tell jQuery not to set contentType
+          success: function (data) {
+            console.log(data);
 
-            }
-          });
-        
+          }
+        });
+
       }
 
     };

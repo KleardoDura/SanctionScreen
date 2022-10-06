@@ -22,9 +22,6 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
 
 
       this.dept = ko.observableArray();
-      // this.name = ko.observable();
-      // this.percantage = ko.observable();
-      // this.similarity = ko.observable();
       var xmlData;
 
       this.groupValid = ko.observable();
@@ -56,7 +53,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
       this.checkNumber = (newValue) => {
         let msgs = [];
         let number = newValue;
-        if (number == 0) {
+        if (number == -1) {
           msgs.push({
             summary: "Number out of range",
             detail: "Number needs to be  0 to 100",
@@ -73,14 +70,14 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
 
 
       self.loadData = function () {
-        
+
         const tracker = document.getElementById("tracker");
-        if (tracker.valid !== "valid") {       
+        if (tracker.valid !== "valid") {
           tracker.showMessages();
           tracker.focusOn("@firstInvalidShown");
-          return ;
+          return;
         }
-      
+
 
         const sanctionReq = {
 
@@ -249,9 +246,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
         // Implement further logic if needed
       };
 
-  
 
-      
 
 
     }
