@@ -34,12 +34,19 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
       if (dd < 10) {
         dd = '0' + dd;
       }
+      console.log(dd);
 
       if (mm < 10) {
         mm = '0' + mm;
       }
+
+      console.log(mm);
+
       yyyy %= 100;
-      today = dd + mm + yyyy;
+      console.log(yyyy);
+      today = dd +""+ mm +""+ yyyy;
+
+
       console.log(today);
 
 
@@ -68,6 +75,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
           percentage: 1
 
         };
+        console.log(sanctionReq);
         var tempArray = [];
         $.ajax({
           type: "POST",
@@ -83,12 +91,6 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
           success: function (data) {
             console.log(JSON.stringify(sanctionReq));
             console.log("test");
-            // parser = new DOMParser();
-            //xmlDoc = parser.parseFromString(data, "text/xml");
-            // let dataObject = xmlToJson(xmlDoc);
-            //Ketu duhet nje kusht qe nese kapet vetem nje elemetn te kthehet si array jo obj          
-            // this.responseData = dataObject.matchResponse.listMatchEntry;
-            console.log('1');
             console.log(data);
             alert('Te dhenat u kaluan me sukses!');
             self.inputNameToAdd(' ');

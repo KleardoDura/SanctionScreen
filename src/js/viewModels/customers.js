@@ -20,8 +20,8 @@
 
 
 
-define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jquery',  '../appController',"ojs/ojknockout", "ojs/ojfilepicker", 'ojs/ojvalidationgroup', "ojs/ojbutton"],
-  function (exports, ko, ojbootstrap_1, FilePickerUtils, $,app) {
+define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jquery', '../appController', "ojs/ojknockout", "ojs/ojfilepicker", 'ojs/ojvalidationgroup', "ojs/ojbutton"],
+  function (exports, ko, ojbootstrap_1, FilePickerUtils, $, app) {
 
 
     function CustomerViewModel() {
@@ -29,7 +29,6 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
 
 
       app.test3();
-
       this.groupValid = ko.observable();
 
       this.fileNames = ko.observableArray([]);
@@ -95,15 +94,17 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
           console.log(result);
 
 
+
+
           if (result === 'xml') {
-           
+
             this.fileNames(file.name);
             alert("File u ngarkua me sukses");
           } else {
             alert('Format jo i duhur');
-           
+
             invalidFiles.push(file.name);
-           
+
           };
         }
 
@@ -115,7 +116,7 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
               severity: "error",
               summary: "File " +
                 invalidFiles[0] +
-                " jo i pershtatshme",
+                " jo i pershtatshem",
             });
           } else {
             const fileNames = invalidFiles.join(", ");
@@ -128,6 +129,8 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
           accept(Promise.reject(messages));
           return 0;
         }
+
+
 
         var formData = new FormData();
         console.log(file);
@@ -144,7 +147,17 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
           }
         });
 
+
+
+
+
+
       }
+
+
+
+
+
 
     };
 

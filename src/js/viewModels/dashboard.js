@@ -120,10 +120,6 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
 
 
 
-
-
-
-
             } else {
               if (!Array.isArray(this.responseData)) {
                 console.log("It is an object");
@@ -151,6 +147,8 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
                 });
               } else {
                 //It is an array
+
+                // Executing a function for each matched element.
                 $.each(dataObject.matchResponse.listMatchEntry, function () {
                   var tempArray = [];
                   tempArray.push({
