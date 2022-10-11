@@ -107,7 +107,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
             } else {
               if (!Array.isArray(this.responseData)) {
                 console.log("It is an object");
-                $.each(dataObject.matchResponse.listMatchEntry, function () {
+               $.each(dataObject.matchResponse.listMatchEntry, function () {
                   var tempArray = [];
                   tempArray.push({
                     id: dataObject.matchResponse.listMatchEntry.id,

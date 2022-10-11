@@ -43,8 +43,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
         var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
   
-  
-       // const d = new Date();
+
         let time = today.getTime();
         console.log(time);
   
@@ -131,9 +130,8 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
           crossDomain: true,
           success: function (data) {
            
-            console.log("test3");
            
-            alert('cACHE U FSHI me sukses!');
+           // alert('cACHE U FSHI me sukses!');
           
 
           }
