@@ -30,22 +30,6 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
       this.value = ko.observable(50);
       this.sliderMessages = ko.observableArray([]);
       this.inputNumberOfRecords = ko.observable(1);
-     /* var deptArray = [{
-        'id': '11091-HMRC',
-        'listName': 'HMRC',
-        'name': 'SALAFIST GROUP FOR CALL AND COMBAT',
-        'percentage': '92.0',
-        'reqName': 'all all'
-      }];
-
-      this.deptObservableArray = ko.observableArray(deptArray);
-      this.dataprovider = new ArrayDataProvider(this.deptObservableArray, {
-        keyAttributes: '@index'
-      });
-      this.isEmptyTable = ko.computed(function () {
-        return this.deptObservableArray().length === 0;
-      }, this);
-*/
 
       this.onValueChange = (event) => {
         this.checkNumber(event.detail.value);
@@ -88,7 +72,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
         var tempArray = [];
         $.ajax({
           type: "POST",
-          url: "http://10.13.12.70:6005/sanction-screening/list/match",
+          url: "http://192.168.220.143:7005/sanction-screening/list/match",
           data: JSON.stringify(sanctionReq),
           headers: {
             "Access-Control-Allow-Origin": "*"
@@ -235,13 +219,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
         }
         return obj;
       };
-/*
-      this.connected = () => {
-        accUtils.announce('Dashboard page loaded.', 'assertive');
-        document.title = "Dashboard";
-        // Implement further logic if needed
-      };
-      */
+
 
     }
     return DashboardViewModel;

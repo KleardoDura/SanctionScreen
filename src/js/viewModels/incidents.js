@@ -26,34 +26,54 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
       self.inputNameToAdd = ko.observable();
       self.groupValid = ko.observable();
 
-      var today = new Date();
-      var dd = today.getDate();
-
-      var mm = today.getMonth() + 1;
-      var yyyy = today.getFullYear();
-      if (dd < 10) {
-        dd = '0' + dd;
-      }
-      console.log(dd);
-
-      if (mm < 10) {
-        mm = '0' + mm;
-      }
-
-      console.log(mm);
-
-      yyyy %= 100;
-      console.log(yyyy);
-      today = dd +""+ mm +""+ yyyy;
-
-
-      console.log(today);
-
+    
 
  
 
 
       self.loadData = function () {
+
+
+
+
+
+        var today = new Date();
+        var dd = today.getDate();
+  
+        var mm = today.getMonth() + 1;
+        var yyyy = today.getFullYear();
+  
+  
+       // const d = new Date();
+        let time = today.getTime();
+        console.log(time);
+  
+  
+  
+        if (dd < 10) {
+          dd = '0' + dd;
+        }
+        console.log(dd);
+  
+        if (mm < 10) {
+          mm = '0' + mm;
+        }
+  
+        console.log(mm);
+  
+        yyyy %= 100;
+        console.log(yyyy);
+        today = dd +""+ mm +""+ yyyy+""+time;
+  
+  
+  
+        console.log(today);
+  
+
+
+
+
+
 
 
         const tracker = document.getElementById("tracker");
@@ -79,7 +99,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
         var tempArray = [];
         $.ajax({
           type: "POST",
-          url: "http://10.13.12.70:6005/sanction-screening/sanctioned/add",
+          url: "http://192.168.220.143:7005/sanction-screening/sanctioned/add",
           data: JSON.stringify(sanctionReq),
           headers: {
             "Access-Control-Allow-Origin": "*"
@@ -98,6 +118,35 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
           }
 
         });
+
+
+        $.ajax({
+          type: "GET",
+          url: " http://192.168.220.143:7005/sanction-screening/list/delete/all",
+          headers: {
+            "Access-Control-Allow-Origin": "*"
+          },
+          contentType: "application/json;application/xml; charset=utf-8",
+          dataType: "json",
+          crossDomain: true,
+          success: function (data) {
+           
+            console.log("test3");
+           
+            alert('cACHE U FSHI me sukses!');
+          
+
+          }
+
+        });
+
+
+
+
+
+
+
+
 
 
 
