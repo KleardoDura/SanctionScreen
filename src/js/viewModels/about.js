@@ -8,30 +8,63 @@
 /*
  * Your about ViewModel code goes here
  */
-define(['../accUtils', '../appController', 'ojs/ojcore', "ojs/ojbootstrap", 'knockout', 'ojs/ojarraydataprovider', "ojs/ojbufferingdataprovider", 'jquery', "exports", "ojs/ojcorerouter", "ojs/ojknockoutrouteradapter", "ojs/ojurlparamadapter", 'ojs/ojknockout', 'ojs/ojcollectiontabledatasource', 'ojs/ojformlayout', 'ojs/ojinputtext',
-    'ojs/ojinputtext', 'ojs/ojbutton', 'ojs/ojtable', 'ojs/ojlabel', 'ojs/ojvalidationgroup',
+define(['../accUtils', '../appController', 'ojs/ojcore', "ojs/ojbootstrap", "ojs/ojmutablearraydataprovider", 'knockout', 'ojs/ojarraydataprovider', "ojs/ojbufferingdataprovider", 'jquery', "exports", "ojs/ojcorerouter", "ojs/ojknockoutrouteradapter", "ojs/ojurlparamadapter", 'ojs/ojknockout', 'ojs/ojcollectiontabledatasource', 'ojs/ojformlayout', 'ojs/ojinputtext',
+    'ojs/ojinputtext', 'ojs/ojbutton', "ojs/ojpopup", "ojs/ojmessagebanner", 'ojs/ojtable', 'ojs/ojlabel', 'ojs/ojvalidationgroup',
     'ojs/ojvalidation-number', 'ojs/ojarraytabledatasource', "ojs/ojnavigationlist"
   ],
-  function (accUtils, app, oj, ojbootstrap_1, ko, ArrayDataProvider, BufferingDataProvider, $, exports, CoreRouter, KnockoutRouterAdapter, UrlParamAdapter) {
+  function (accUtils, app, oj, ojbootstrap_1, MutableArrayDataProvider, ko, ArrayDataProvider, BufferingDataProvider, $, exports, CoreRouter, KnockoutRouterAdapter, UrlParamAdapter) {
     function AboutViewModel() {
       var self = this;
       self.inputUserName = ko.observable();
       self.inputPassword = ko.observable();
       self.groupValid = ko.observable();
-      
-      app.test2();
-      self.loadData = function () {
-        if(self.inputUserName()==='beardo' && self.inputPassword()==='1234'){
-        app.test();
 
-        }
-        else{
-          alert('Te dhenat jane te pasakta');
+
+      const initialPersonalSectionData = [];
+      this.closePersonalInformationMessage = (event) => {
+          // remove the message from the data to close it
+          let data = this.personalInformationMessages.data.slice();
+          const closeMessageKey = event.detail.key;
+          data = data.filter((message) => message.id !== closeMessageKey);
+          this.personalInformationMessages.data = data;
+      };
+
+
+      app.test2();
+
+      self.loadData = () => {
+
+
+
+
+        if (self.inputUserName() === 'beardo' && self.inputPassword() === '1234') {
+          app.test();
+
+        } else {
           self.inputUserName(null);
           self.inputPassword(null);
-    
+          let data = this.personalInformationMessages.data.slice();
+          data.push({
+              id: `message-${++this.counter}`,
+              severity: 'error',
+              summary: 'Gabim!',
+              detail: 'Kredencialet e vendosura jane te gabuara!'
+          });
+          this.personalInformationMessages.data = data;
+  
+        
+          
+
         }
       }
+      
+      this.personalInformationMessages = new MutableArrayDataProvider(initialPersonalSectionData, {
+        keyAttributes: 'id'
+    });
+    this.counter = 0;
+
+     
+
     }
     return AboutViewModel;
   }

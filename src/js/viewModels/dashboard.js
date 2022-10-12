@@ -92,7 +92,6 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
             console.log(this.responseData);
             if (this.responseData == undefined) {
               console.log('S ka te dhena');
-              alert('Ska te dhena');
               var tempArray1 = [];
 
               self.data(tempArray1);

@@ -20,7 +20,7 @@
 
 
 
-define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jquery', '../appController', "ojs/ojknockout", "ojs/ojfilepicker", 'ojs/ojvalidationgroup', "ojs/ojbutton"],
+define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jquery', '../appController', "ojs/ojknockout", "ojs/ojfilepicker", 'ojs/ojvalidationgroup', "ojs/ojbutton", "ojs/ojpopup"],
   function (exports, ko, ojbootstrap_1, FilePickerUtils, $, app) {
 
 
@@ -66,14 +66,19 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
         for (let i = 0; i < files.length; i++) {
           file = files[i];
           if (file.size > 10000000) {
-            alert('File shume i madh');
+            let popup = document.getElementById("popup1");
+            popup.open("#btnGo");
+
             invalidFiles.push(file.name);
             check = true;
           }
           if (file.size === 0) {
-            alert('File nuk mund te jete bosh');
+     
             invalidFiles.push(file.name);
             check = true;
+
+            let popup = document.getElementById("popup2");
+            popup.open("#btnGo");
 
           }
         }
@@ -99,9 +104,12 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
           if (result === 'xml') {
 
             this.fileNames(file.name);
-            alert("File u ngarkua me sukses");
+            let popup = document.getElementById("popup3");
+            popup.open("#btnGo");
+
           } else {
-            alert('Format jo i duhur');
+            let popup = document.getElementById("popup4");
+            popup.open("#btnGo");
 
             invalidFiles.push(file.name);
 
@@ -155,6 +163,23 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
       }
 
 
+      self.cancelListener = () =>{
+        let popup = document.getElementById("popup1");
+        popup.close();
+      }
+      self.cancelListener2 = () =>{
+        let popup = document.getElementById("popup2");
+        popup.close();
+      }
+      self.cancelListener3 = () =>{
+        let popup = document.getElementById("popup3");
+        popup.close();
+      }
+
+      self.cancelListener4 = () =>{
+        let popup = document.getElementById("popup4");
+        popup.close();
+      }
 
 
 

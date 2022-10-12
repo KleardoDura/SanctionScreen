@@ -13,11 +13,11 @@
 
 
 
-define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs/ojbufferingdataprovider", 'jquery', '../appController', 'ojs/ojknockout', 'ojs/ojcollectiontabledatasource', 'ojs/ojformlayout', 'ojs/ojinputtext', 'ojs/ojslider',
-    'ojs/ojinputnumber', 'ojs/ojbutton', 'ojs/ojtable', 'ojs/ojlabel', 'ojs/ojvalidationgroup',
+define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs/ojbufferingdataprovider", 'jquery', '../appController', "ojs/ojmutablearraydataprovider", 'ojs/ojknockout', 'ojs/ojcollectiontabledatasource', 'ojs/ojformlayout', 'ojs/ojinputtext', 'ojs/ojslider',
+    'ojs/ojinputnumber', 'ojs/ojbutton' , "ojs/ojmessagebanner", "ojs/ojpopup", 'ojs/ojtable', 'ojs/ojlabel', 'ojs/ojvalidationgroup',
     'ojs/ojvalidation-number', 'ojs/ojarraytabledatasource'
   ],
-  function (accUtils, oj, ko, ArrayDataProvider, BufferingDataProvider, $,app) {
+  function (accUtils, oj, ko, ArrayDataProvider, BufferingDataProvider, $,app,MutableArrayDataProvider) {
     function IncidentsViewModel() {
 
 
@@ -27,28 +27,27 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
       self.groupValid = ko.observable();
 
     
-
+      const initialPersonalSectionData = [];
+      this.closePersonalInformationMessage = (event) => {
+          // remove the message from the data to close it
+          let data = this.personalInformationMessages.data.slice();
+          const closeMessageKey = event.detail.key;
+          data = data.filter((message) => message.id !== closeMessageKey);
+          this.personalInformationMessages.data = data;
+      };
  
 
 
-      self.loadData = function () {
-
-
-
-
-
+      self.loadData = () => {
         var today = new Date();
         var dd = today.getDate();
   
         var mm = today.getMonth() + 1;
         var yyyy = today.getFullYear();
-  
 
         let time = today.getTime();
         console.log(time);
-  
-  
-  
+
         if (dd < 10) {
           dd = '0' + dd;
         }
@@ -63,17 +62,6 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
         yyyy %= 100;
         console.log(yyyy);
         today = dd +""+ mm +""+ yyyy+""+time;
-  
-  
-  
-        console.log(today);
-  
-
-
-
-
-
-
 
         const tracker = document.getElementById("tracker");
         if (tracker.valid !== "valid") {
@@ -81,7 +69,6 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
           tracker.focusOn("@firstInvalidShown");
           return;
         }
-
 
 
 
@@ -111,13 +98,29 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
             console.log(JSON.stringify(sanctionReq));
             console.log("test");
             console.log(data);
-            alert('Te dhenat u kaluan me sukses!');
+
+
+
+  
+
             self.inputNameToAdd(' ');
 
           }
 
+
+          
+
         });
 
+
+        let data = this.personalInformationMessages.data.slice();
+        data.push({
+            id: `message-${++this.counter}`,
+            severity: 'confirmation',
+            summary: 'Sukses!',
+            detail: 'Te dhenat u kaluan me sukses!'
+        });
+        this.personalInformationMessages.data = data;
 
         $.ajax({
           type: "GET",
@@ -129,9 +132,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
           dataType: "json",
           crossDomain: true,
           success: function (data) {
-           
-           
-           // alert('cACHE U FSHI me sukses!');
+      
           
 
           }
@@ -154,8 +155,10 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
 
 
 
-
-
+      this.personalInformationMessages = new MutableArrayDataProvider(initialPersonalSectionData, {
+        keyAttributes: 'id'
+    });
+    this.counter = 0;
 
 
 

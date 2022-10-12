@@ -49,12 +49,37 @@
         </br>
 
       </oj-validation-group>
+      <div id="containerDiv">
+     
+      </div>
       </br>
+
+
+
+
+
+      <oj-message-banner
+      data="[[personalInformationMessages]]"
+      type="section"
+      on-oj-close="[[closePersonalInformationMessage]]"></oj-message-banner>
+      </br>
+  
+      
+
+
+
+
+
+
+
+
+
 
       <oj-button id="log-in-button"
                  style="background-color: #83BB26;"
-                 on-click="[[loadData]]">Log in</oj-button>
+                 on-oj-action="[[loadData]]">Log in</oj-button>
       <br />
+  
     </div>
 
 
