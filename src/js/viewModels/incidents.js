@@ -39,6 +39,8 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
 
 
       self.loadData = () => {
+
+        this.personalInformationMessages.data =null;
         var today = new Date();
         var dd = today.getDate();
   
@@ -118,7 +120,7 @@ define(['../accUtils', 'ojs/ojcore', 'knockout', 'ojs/ojarraydataprovider', "ojs
             id: `message-${++this.counter}`,
             severity: 'confirmation',
             summary: 'Sukses!',
-            detail: 'Te dhenat u kaluan me sukses!'
+            detail: self.inputNameToAdd()+" "+ 'u shtua me sukses!'
         });
         this.personalInformationMessages.data = data;
 

@@ -14,7 +14,13 @@ define(['../accUtils', '../appController', 'ojs/ojcore', "ojs/ojbootstrap", "ojs
   ],
   function (accUtils, app, oj, ojbootstrap_1, MutableArrayDataProvider, ko, ArrayDataProvider, BufferingDataProvider, $, exports, CoreRouter, KnockoutRouterAdapter, UrlParamAdapter) {
     function AboutViewModel() {
+  
       var self = this;
+  
+      
+
+
+
       self.inputUserName = ko.observable();
       self.inputPassword = ko.observable();
       self.groupValid = ko.observable();
@@ -33,11 +39,15 @@ define(['../accUtils', '../appController', 'ojs/ojcore', "ojs/ojbootstrap", "ojs
       app.test2();
 
       self.loadData = () => {
-
-
-
+      
+       
+        this.personalInformationMessages.data =null;
 
         if (self.inputUserName() === 'beardo' && self.inputPassword() === '1234') {
+
+
+          
+
           app.test();
 
         } else {

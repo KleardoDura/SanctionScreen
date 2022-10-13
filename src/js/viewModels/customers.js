@@ -30,11 +30,12 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
 
       app.test3();
       this.groupValid = ko.observable();
-
+      var checkErrorMessage=0;
       this.fileNames = ko.observableArray([]);
       this.invalidMessage = ko.observable("");
       this.selectListener = (event) => {
         this.invalidMessage("");
+        document.getElementById('valid').style.removeProperty("display");
         const files = event.detail.files;
         this.fileNames(Array.prototype.map.call(files, (file) => {
           return file.name;
@@ -53,33 +54,36 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
             this.invalidMessage("");
           });
         }
+       document.getElementById('invalid').style.removeProperty("display");
       };
       this.beforeSelectListener = (event) => {
+        document.getElementById('valid').style.display="none";
+        document.getElementById('invalid').style.display="none";
+    
         const accept = event.detail.accept;
         const files = event.detail.files;
-        const messages = [];
+       const messages = [];
         let file;
-        const invalidFiles = [];
+       const invalidFiles = [];
         var check = false;
+
 
         //kontrollojm permasat
         for (let i = 0; i < files.length; i++) {
           file = files[i];
           if (file.size > 10000000) {
-            let popup = document.getElementById("popup1");
-            popup.open("#btnGo");
-
+           
             invalidFiles.push(file.name);
             check = true;
+            checkErrorMessage=1;
           }
           if (file.size === 0) {
      
             invalidFiles.push(file.name);
             check = true;
+            checkErrorMessage=2;
 
-            let popup = document.getElementById("popup2");
-            popup.open("#btnGo");
-
+        
           }
         }
 
@@ -104,14 +108,13 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
           if (result === 'xml') {
 
             this.fileNames(file.name);
-            let popup = document.getElementById("popup3");
-            popup.open("#btnGo");
+           
 
           } else {
-            let popup = document.getElementById("popup4");
-            popup.open("#btnGo");
+           
 
             invalidFiles.push(file.name);
+            checkErrorMessage=3;
 
           };
         }
@@ -120,12 +123,38 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
           accept(Promise.resolve());
         } else {
           if (invalidFiles.length === 1) {
-            messages.push({
-              severity: "error",
-              summary: "File " +
-                invalidFiles[0] +
-                " jo i pershtatshem",
-            });
+
+
+              if(checkErrorMessage===1){
+                messages.push({
+                  severity: "error",
+                  summary: "File " +
+                    invalidFiles[0] +
+                    " eshte shume i madh",
+                });
+
+              }
+
+              if(checkErrorMessage===2){
+                messages.push({
+                  severity: "error",
+                  summary: "File " +
+                    invalidFiles[0] +
+                    " eshte bosh",
+                });
+              }
+
+              if(checkErrorMessage===3){
+
+                messages.push({
+                  severity: "error",
+                  summary: "File " +
+                    invalidFiles[0] +
+                    " nuk eshte ne formatin e duhur",
+                });
+              }
+  
+          
           } else {
             const fileNames = invalidFiles.join(", ");
             messages.push({
@@ -163,25 +192,7 @@ define(["exports", "knockout", "ojs/ojbootstrap", "ojs/ojfilepickerutils", 'jque
       }
 
 
-      self.cancelListener = () =>{
-        let popup = document.getElementById("popup1");
-        popup.close();
-      }
-      self.cancelListener2 = () =>{
-        let popup = document.getElementById("popup2");
-        popup.close();
-      }
-      self.cancelListener3 = () =>{
-        let popup = document.getElementById("popup3");
-        popup.close();
-      }
-
-      self.cancelListener4 = () =>{
-        let popup = document.getElementById("popup4");
-        popup.close();
-      }
-
-
+     
 
 
     };

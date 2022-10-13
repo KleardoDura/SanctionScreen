@@ -9,7 +9,8 @@
 </br>
 
 <div id="tableDemo" class="oj-flex oj-flex-items-pad">
-  <div class="oj-xl-4 oj-lg-4 oj-md-4 oj-flex-item">
+  <div class="oj-xl-4 oj-lg-4 oj-md-4 oj-flex-item"
+       style="position:absolute">
     <oj-validation-group id="tracker"
                          valid="{{groupValid}}">
 
@@ -38,20 +39,21 @@
 
 
 
-   
-    <oj-message-banner
-    data="[[personalInformationMessages]]"
-    type="section"
-    on-oj-close="[[closePersonalInformationMessage]]"></oj-message-banner>
-    </br>
 
-    
-   
+
+
 
     <oj-button id="add-button"
                style="background-color: #83BB26;"
                on-oj-action="[[loadData]]">ADD</oj-button>
-    <br />
+  <br></br>
+
+    <oj-message-banner data="[[personalInformationMessages]]"
+                       type="section"
+                       on-oj-close="[[closePersonalInformationMessage]]">
+    </oj-message-banner>
+    </br>
+
   </div>
 
 

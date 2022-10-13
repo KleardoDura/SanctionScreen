@@ -19,109 +19,7 @@
 
 
 
-        <oj-popup id="popup1" class="demo-popup"
-                  auto-dismiss="none" modality="modal"
-                  position.my.horizontal="center"
-                  position.my.vertical="center"
-                  position.at.horizontal="center"
-                  position.at.vertical="center"
-                  position.of="window" tail="none">
-          <div class="demo-popup-body">
-            <div class="demo-popup-header">
-              <oj-button id="btnCancel" class="oj-button-sm"
-                         display="icons"
-                         on-oj-action="[[cancelListener]]">
-                <span slot="startIcon"
-                      class="oj-ux-ico-close"></span>
-                Cancel
-              </oj-button>
-            </div>
-            <div
-                 class="demo-popup-content oj-sm-padding-2x">
-              <p>
-                File shume i madh!
-              </p>
-            </div>
-          </div>
-        </oj-popup>
-
-        <oj-popup id="popup2" class="demo-popup"
-                  auto-dismiss="none" modality="modal"
-                  position.my.horizontal="center"
-                  position.my.vertical="center"
-                  position.at.horizontal="center"
-                  position.at.vertical="center"
-                  position.of="window" tail="none">
-          <div class="demo-popup-body">
-            <div class="demo-popup-header">
-              <oj-button id="btnCancel" class="oj-button-sm"
-                         display="icons"
-                         on-oj-action="[[cancelListener2]]">
-                <span slot="startIcon"
-                      class="oj-ux-ico-close"></span>
-                Cancel
-              </oj-button>
-            </div>
-            <div
-                 class="demo-popup-content oj-sm-padding-2x">
-              <p>
-                File nuk mund te jete bosh!
-              </p>
-            </div>
-          </div>
-        </oj-popup>
-
-        <oj-popup id="popup3" class="demo-popup"
-                  auto-dismiss="none" modality="modal"
-                  position.my.horizontal="center"
-                  position.my.vertical="center"
-                  position.at.horizontal="center"
-                  position.at.vertical="center"
-                  position.of="window" tail="none">
-          <div class="demo-popup-body">
-            <div class="demo-popup-header">
-              <oj-button id="btnCancel" class="oj-button-sm"
-                         display="icons"
-                         on-oj-action="[[cancelListener3]]">
-                <span slot="startIcon"
-                      class="oj-ux-ico-close"></span>
-                Cancel
-              </oj-button>
-            </div>
-            <div
-                 class="demo-popup-content oj-sm-padding-2x">
-              <p>
-                Te dhenat u kaluan me sukses!
-              </p>
-            </div>
-          </div>
-        </oj-popup>
-
-        <oj-popup id="popup4" class="demo-popup"
-                  auto-dismiss="none" modality="modal"
-                  position.my.horizontal="center"
-                  position.my.vertical="center"
-                  position.at.horizontal="center"
-                  position.at.vertical="center"
-                  position.of="window" tail="none">
-          <div class="demo-popup-body">
-            <div class="demo-popup-header">
-              <oj-button id="btnCancel" class="oj-button-sm"
-                         display="icons"
-                         on-oj-action="[[cancelListener4]]">
-                <span slot="startIcon"
-                      class="oj-ux-ico-close"></span>
-                Cancel
-              </oj-button>
-            </div>
-            <div
-                 class="demo-popup-content oj-sm-padding-2x">
-              <p>
-                Format jo i duhur!
-              </p>
-            </div>
-          </div>
-        </oj-popup>
+       
 
         <div id="parentContainer" class="oj-sm-padding-1x">
           <oj-file-picker on-oj-select="[[selectListener]]"
@@ -132,12 +30,12 @@
                class="oj-text-color-secondary oj-typography-body-sm oj-sm-padding-1x-top">
             Maximum file size is 10MB
           </div>
-          <div id="valid" class="oj-sm-padding-1x-top">
+          <div id="valid" class="oj-sm-padding-1x-top" style="color: green; display:none;">
             Selected files:
             <oj-bind-text value="[[fileNames]]">
             </oj-bind-text>
           </div>
-          <div id="invalid" class="oj-sm-padding-1x-top">
+          <div id="invalid" style="color: red; display:none;"class="oj-sm-padding-1x-top">
             Invalid Message Content:
             <oj-bind-text value="[[invalidMessage]]">
             </oj-bind-text>
